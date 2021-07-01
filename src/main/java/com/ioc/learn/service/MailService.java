@@ -1,5 +1,6 @@
 package com.ioc.learn.service;
 
+import com.ioc.learn.annotation.MetricTime;
 import com.ioc.learn.factory.ZoneIdFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +36,7 @@ public class MailService {
     public void sendLoginMail(User user) throws Exception {
         System.err.println(String.format("Hi, %s! You are logged in at %s", user.getName(), getTime()));
     }
-
+    @MetricTime("sendRegistrationMail")
     public void sendRegistrationMail(User user) {
         System.err.println(String.format("Welcome, %s!", user.getName()));
 

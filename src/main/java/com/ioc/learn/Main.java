@@ -16,11 +16,12 @@ import java.time.ZoneId;
 
 @ComponentScan
 @Configuration
+@EnableAspectJAutoProxy
 public class Main {
     public static void main(String[] args) throws SQLException {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);//ioc容器的接口
         UserService userService = context.getBean(UserService.class);//从ioc容器中获取实例
-        User user = UserService.login("alice@example.com", "password");
+        User user = userService.register("sean4@example.com", "password", "sean4");
         System.out.println(user.getName());
     }
 
@@ -39,7 +40,7 @@ public class Main {
 //    @Qualifier("hikariDataSource")
     HikariDataSource getDataSource(){
         HikariConfig config = new HikariConfig();
-        config.setDriverClassName("com.mysql.jdbc.Driver");
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setJdbcUrl("jdbc:mysql://localhost:3306/learnjdbc");
         config.setUsername("root");
         config.setPassword("sean");
